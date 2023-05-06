@@ -1,11 +1,10 @@
-import App from '../App';
 
 interface Props {
-
+	onCancel: () => void,
 }
 
-export default function ProjectForm () {
-	
+export default function ProjectForm (props: Props) {
+	const onCancel = props.onCancel;
 	return (
 		<form action="" className="input-group vertical">
 			<label htmlFor="name">Project Name</label>
@@ -18,7 +17,7 @@ export default function ProjectForm () {
 			<input type="checkbox" name='isActive' />
 			<div className='input-group'>
 				<button type='submit' className='primary bordered medium'>Save</button>
-				<button type='reset' className='bordered medium'>Cancel</button>
+				<button type='reset' onClick={onCancel} className='bordered medium'>Cancel</button>
 			</div>
 		</form>
 	)

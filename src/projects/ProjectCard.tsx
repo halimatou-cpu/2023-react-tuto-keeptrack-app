@@ -2,6 +2,7 @@ import { Project } from "./Project";
 
 interface Props {
   project: Project;
+  onEdit: (project: Project) => void
 }
 
 function formatDescription(description: string): string {
@@ -10,9 +11,9 @@ function formatDescription(description: string): string {
 }
 
 export default function ProjectCard(props: Props) {
-  const { project } = props;
+  const { project, onEdit } = props;
   const handleEditClick = (projectToEdit: Project) => {
-    console.log(projectToEdit);
+	onEdit(projectToEdit);
   };
   return (
     <div className="card" style={{ display: "flex" }}>
