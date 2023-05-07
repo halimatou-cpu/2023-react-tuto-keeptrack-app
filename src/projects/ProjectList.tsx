@@ -14,7 +14,6 @@ export default function ProjectList(props: Props) {
   const { projects, onSave } = props;
 
   const handleEdit = (project: Project) => {
-    console.log("Editing: ", project);
     setProjectBeingEdited(project);
   };
 
@@ -25,7 +24,7 @@ export default function ProjectList(props: Props) {
       {projects.map((project) => (
         <div key={project.id} className="cols-sm">
           {project === projectBeingEdited ? (
-            <ProjectForm onCancel={cancelEditing} onSave={onSave} />
+            <ProjectForm project={project} onCancel={cancelEditing} onSave={onSave} />
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}
