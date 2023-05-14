@@ -4,6 +4,9 @@ import ProjectsPage from './projects/ProjectsPage';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import HomePage from './home/HomePage';
 import ProjectPage from './projects/ProjectPage';
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 function App() {
   return (  
