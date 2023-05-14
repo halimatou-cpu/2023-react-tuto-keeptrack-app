@@ -3,12 +3,10 @@ import './App.css';
 import ProjectsPage from './projects/ProjectsPage';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import HomePage from './home/HomePage';
+import ProjectPage from './projects/ProjectPage';
 
 function App() {
-  return (
-    // <div className='container'>
-    //   <ProjectsPage/>
-    // </div>
+  return (  
     <Router> 
       <header className="sticky">
         <span className='logo'>
@@ -27,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <HomePage /> } />
           <Route path="/projects" element={ <ProjectsPage/> } />
+          <Route path="/projects/:id" element={ <ProjectPage/> } />
         </Routes>
       </div>
       </Router>

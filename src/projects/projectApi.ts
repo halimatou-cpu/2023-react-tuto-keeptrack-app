@@ -11,7 +11,7 @@ function translateStatusToErrorMessage(status: number) {
 			return 'Please login again.';
 		case 403:
 			return 'You do not have permission to view the project(s).';
-		case 404: 
+		case 404:
 			return 'Project not found.'
 		default:
 			return 'There was an error retrieving the project(s). Please try again.';
@@ -68,23 +68,31 @@ const projectAPI = {
 			});
 	},
 
-	put(project: Project) {
-		return fetch(`${url}/${project.id}`, {
-			method: 'PUT',
-			body: JSON.stringify(project),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(checkStatus)
-			.then(parseJSON)
-			.catch((error: TypeError) => {
-				console.log('Log client error ' + error);
-				throw new Error(
-					'There was an error updating the project. Please try again.'
-				)
-			})
-	}
+	async put(project: Project) {
+		try {
+			const response = await fetch(`${url}/${project.id}`, {
+				method: 'PUT',
+				body: JSON.stringify(project),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			const response_1 = await checkStatus(response);
+			return parseJSON(response_1);
+		} catch (error) {
+			console.log('Log client error ' + error);
+			throw new Error(
+				'There was an error updating the project. Please try again.'
+			);
+		}
+	},
+
+	async find(id: number) {
+		const response = await fetch(`${url}/${id}`);
+		const response_1 = await checkStatus(response);
+		const item = await parseJSON(response_1);
+		return convertToProjectModel(item);
+	},
 };
 
 export { projectAPI };
