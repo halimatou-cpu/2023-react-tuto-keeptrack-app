@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Project } from "./Project";
 
@@ -8,7 +9,6 @@ interface Props {
 
 function formatDescription(description: string): string {
   return description.substring(0, 60) + "...";
-  //   return description;
 }
 
 export default function ProjectCard(props: Props) {
