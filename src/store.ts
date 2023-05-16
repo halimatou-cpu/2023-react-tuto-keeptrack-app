@@ -1,8 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import ReduxThunk from "redux-thunk";
+import { initialProjectState, projectReducer } from "./projects/state/projectReducer";
+import { ProjectState } from "./projects/state/projectTypes";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+	projectState: projectReducer
+});
 
 function configureStore(preloadedState: any) {
 	const middlewares = [ReduxThunk];
@@ -22,9 +26,13 @@ function configureStore(preloadedState: any) {
 	return store;
 }
 
-export interface AppState { }
+export interface AppState {
+	projectState: ProjectState;
+}
 
-export const initialAppState: AppState = {};
+export const initialAppState: AppState = {
+	projectState: initialProjectState
+};
 
 const store = configureStore(initialAppState);
 export default store;
