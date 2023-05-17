@@ -30,8 +30,11 @@ export default function ProjectList({ projects, onMoreClick }: Props) {
           )}
         </div>
       ))}
-
-      <button className="pagination" onClick={onMoreClick}> <span className="icon-link" /> Next</button>
+      {projects.length > 0 && (
+        <button className="pagination" onClick={onMoreClick}>
+          <span className="icon-link" /> Next
+        </button>
+      )}
     </div>
   );
 }
