@@ -6,10 +6,11 @@ import ProjectForm from "./ProjectForm";
 
 interface Props {
   projects: Project[];
+  onMoreClick: () => void;
   // onSave: (project: Project) => void;
 }
 
-export default function ProjectList({ projects }: Props) {
+export default function ProjectList({ projects, onMoreClick }: Props) {
   const [projectBeingEdited, setProjectBeingEdited] = useState({});
 
   const handleEdit = (project: Project) => {
@@ -29,6 +30,8 @@ export default function ProjectList({ projects }: Props) {
           )}
         </div>
       ))}
+
+      <button className="pagination" onClick={onMoreClick}> <span className="icon-link" /> Next</button>
     </div>
   );
 }

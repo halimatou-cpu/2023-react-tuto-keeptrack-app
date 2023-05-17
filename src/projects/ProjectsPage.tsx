@@ -12,9 +12,6 @@ import { AnyAction } from "redux";
 import { loadProjects } from "./state/projectActions";
 
 function ProjectsPage() {
-  // const [projects, setProjects] = useState<Project[]>([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState<string | undefined | null>(undefined);
 
   const loading = useSelector(
     (appState: AppState) => appState.projectState.loading
@@ -30,38 +27,6 @@ function ProjectsPage() {
   );
   const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   projectAPI
-  //     .get(1)
-  //     .then((data) => {
-  //       setError(null);
-  //       setLoading(false);
-  //       setProjects(data);
-  //     })
-  //     .catch((e) => {
-  //       setLoading(false);
-  //       setError(e.message);
-  //       if (e instanceof Error) {
-  //         setError(e.message);
-  //       }
-  //     });
-  // }, [currentPage]);
-
-  // const saveProject = (project: Project) => {
-  //   projectAPI
-  //     .put(project)
-  //     .then((updatedProject) => {
-  //       let updatedProjects = projects.map((p: Project) => {
-  //         return p.id === project.id ? new Project(updatedProject) : p;
-  //       });
-  //       setProjects(updatedProjects);
-  //     })
-  //     .catch((e) => {
-  //       if (e instanceof Error) setError(e.message);
-  //     });
-  // };
-
   useEffect(() => {
     dispatch(loadProjects(1));
   }, [dispatch]);
@@ -72,7 +37,6 @@ function ProjectsPage() {
 
   return (
     <Fragment>
-      {/* <h1>Projects</h1> */}
       {error && (
         <div className="row">
           <div className="card fluid error">
@@ -85,7 +49,7 @@ function ProjectsPage() {
           </div>
         </div>
       )}
-      <ProjectList projects={projects} />
+      <ProjectList projects={projects} onMoreClick={handleMoreClick} />
       {loading && (
         <div className="center-page">
           <span className="spinner primary" />

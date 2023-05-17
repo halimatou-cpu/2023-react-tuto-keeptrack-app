@@ -787,8 +787,8 @@
       "imageUrl": "/assets/placeimg_500_300_arch7.jpg",
       "contractTypeId": 2,
       "contractSignedOn": "2016-01-22T17:55:42.051Z",
-      "budget": 37661,
-      "isActive": false
+      "budget": 37660,
+      "isActive": true
     },
     {
       "id": 80,
