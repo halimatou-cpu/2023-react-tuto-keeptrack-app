@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Project } from "./Project";
 import ProjectCard from "./ProjectCard";
@@ -5,13 +6,12 @@ import ProjectForm from "./ProjectForm";
 
 interface Props {
   projects: Project[];
-  onSave: (project: Project) => void;
+  onMoreClick: () => void;
+  // onSave: (project: Project) => void;
 }
 
-export default function ProjectList(props: Props) {
+export default function ProjectList({ projects, onMoreClick }: Props) {
   const [projectBeingEdited, setProjectBeingEdited] = useState({});
-
-  const { projects, onSave } = props;
 
   const handleEdit = (project: Project) => {
     setProjectBeingEdited(project);
@@ -24,12 +24,17 @@ export default function ProjectList(props: Props) {
       {projects.map((project) => (
         <div key={project.id} className="cols-sm">
           {project === projectBeingEdited ? (
-            <ProjectForm project={project} onCancel={cancelEditing} onSave={onSave} />
+            <ProjectForm project={project} onCancel={cancelEditing} />
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}
         </div>
       ))}
+      {projects.length > 0 && (
+        <button className="pagination" onClick={onMoreClick}>
+          <span className="icon-link" /> Next
+        </button>
+      )}
     </div>
   );
 }

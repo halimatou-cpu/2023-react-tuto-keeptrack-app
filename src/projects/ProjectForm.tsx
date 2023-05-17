@@ -1,9 +1,15 @@
+import React from "react";
 import { SyntheticEvent, useState } from "react";
 import { Project } from "./Project";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
+import { ProjectState } from "./state/projectTypes";
+import { saveProject } from "./state/projectActions";
 
 interface Props {
   project: Project;
-  onSave: (project: Project) => void;
+  // onSave: (project: Project) => void;
   onCancel: () => void;
 }
 
@@ -18,7 +24,7 @@ function ErrorComponent(props: { msg: string }) {
 
 export default function ProjectForm({
   project: initialProject, // project is renamed initialProject
-  onSave,
+  // onSave,
   onCancel,
 }: Props) {
   const [project, setProject] = useState(initialProject);
@@ -28,11 +34,14 @@ export default function ProjectForm({
     budget: "",
   });
 
+  const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
+
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     if (!isValid()) return;
-    onSave(project);
-    onCancel();
+    // onSave(project);
+    dispatch(saveProject(project));
+    // onCancel();
   };
 
   const validate = (project: Project) => {
