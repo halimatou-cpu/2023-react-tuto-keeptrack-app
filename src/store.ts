@@ -5,7 +5,7 @@ import { initialProjectState, projectReducer } from "./projects/state/projectRed
 import { ProjectState } from "./projects/state/projectTypes";
 
 const reducer = combineReducers({
-	projectState: projectReducer
+	projectState: projectReducer,
 });
 
 function configureStore(preloadedState: any) {
