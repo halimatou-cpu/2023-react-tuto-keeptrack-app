@@ -4,6 +4,9 @@ import { Project } from "../Project";
 export const LOAD_PROJECTS_REQUEST = 'LOAD_PROJECTS_REQUEST';
 export const LOAD_PROJECTS_SUCCESS = 'LOAD_PROJECTS_SUCCESS';
 export const LOAD_PROJECTS_FAILURE = 'LOAD_PROJECTS_FAILURE';
+export const LOAD_PROJECT_REQUEST = 'LOAD_PROJECT_REQUEST';
+export const LOAD_PROJECT_SUCCESS = 'LOAD_PROJECT_SUCCESS';
+export const LOAD_PROJECT_FAILURE = 'LOAD_PROJECT_FAILURE';
 export const SAVE_PROJECT_REQUEST = 'SAVE_PROJECT_REQUEST';
 export const SAVE_PROJECT_SUCCESS = 'SAVE_PROJECT_SUCCESS';
 export const SAVE_PROJECT_FAILURE = 'SAVE_PROJECT_FAILURE';
@@ -20,7 +23,7 @@ interface LoadProjectsSuccess {
 	payload: {
 		projects: Project[];
 		page: number;
-		filter?: string ;
+		filter?: string;
 	}
 }
 
@@ -31,48 +34,66 @@ interface LoadProjectsFailure {
 	}
 }
 
+interface LoadProjectRequest {
+	type: typeof LOAD_PROJECT_REQUEST;
+}
+
+interface LoadProjectSuccess {
+	type: typeof LOAD_PROJECT_SUCCESS;
+	payload: Project;
+}
+
+interface LoadProjectFailure {
+	type: typeof LOAD_PROJECT_FAILURE;
+	payload: { message: string };
+}
+
 interface SaveProjectRequest {
 	type: typeof SAVE_PROJECT_REQUEST;
-  }
-  
-  interface SaveProjectSuccess {
+}
+
+interface SaveProjectSuccess {
 	type: typeof SAVE_PROJECT_SUCCESS;
 	payload: Project;
-  }
-  
-  interface SaveProjectFailure {
+}
+
+interface SaveProjectFailure {
 	type: typeof SAVE_PROJECT_FAILURE;
 	payload: { message: string };
-  }
-  
-  interface DeleteProjectRequest {
+}
+
+interface DeleteProjectRequest {
 	type: typeof DELETE_PROJECT_REQUEST;
-  }
-  
-  interface DeleteProjectSuccess {
+}
+
+interface DeleteProjectSuccess {
 	type: typeof DELETE_PROJECT_SUCCESS;
 	payload: Project;
-  }
-  
-  interface DeleteProjectFailure {
+}
+
+interface DeleteProjectFailure {
 	type: typeof DELETE_PROJECT_FAILURE;
 	payload: { message: string };
-  }
+}
 
-  export type ProjectActionTypes =
-  | LoadProjectsRequest
-  | LoadProjectsSuccess
-  | LoadProjectsFailure
-  | SaveProjectRequest
-  | SaveProjectSuccess
-  | SaveProjectFailure
-  | DeleteProjectRequest
-  | DeleteProjectSuccess
-  | DeleteProjectFailure;
+export type ProjectActionTypes =
+	| LoadProjectsRequest
+	| LoadProjectsSuccess
+	| LoadProjectsFailure
+	| LoadProjectRequest
+	| LoadProjectSuccess
+	| LoadProjectFailure
+	| SaveProjectRequest
+	| SaveProjectSuccess
+	| SaveProjectFailure
+	| DeleteProjectRequest
+	| DeleteProjectSuccess
+	| DeleteProjectFailure;
 
 export interface ProjectState {
 	loading: boolean;
 	projects: Project[];
+	currentProject?: Project;
 	error?: string;
 	page: number;
 }
